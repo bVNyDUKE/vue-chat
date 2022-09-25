@@ -41,7 +41,12 @@ onBeforeMount(async () => {
 onMounted(() => scroll());
 onUpdated(() => scroll());
 
-const socket = new WebSocket(`ws://localhost:8000`);
+const socketUrl =
+  window.location.host === "localhost"
+    ? "ws://localhost:8000"
+    : `ws://${window.location.host}`;
+
+const socket = new WebSocket(socketUrl);
 socket.addEventListener("open", () => socket.send("Hello!"));
 socket.addEventListener("message", (ev: MessageEvent) => {
   const messageData = JSON.parse(ev.data);
