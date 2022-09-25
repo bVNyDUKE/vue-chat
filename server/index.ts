@@ -23,7 +23,7 @@ server.on("upgrade", (request: Request, socket, head) => {
   });
 });
 
-const port = 8000;
+const port = process.env.PORT;
 server.listen(port, () => {
   console.log(`App started on port ${port}`);
 });

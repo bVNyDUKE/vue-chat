@@ -22,9 +22,10 @@ export default defineConfig(({ command }) => ({
         rewrite: (path) => path.replace(/^\/api/, ""),
       },
       "/ws": {
-        target: "ws://localhost:8000",
+        target: command === "serve" ? "ws://localhost:8000" : "/",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/ws/, ""),
+        ws: true,
       },
     },
   },
