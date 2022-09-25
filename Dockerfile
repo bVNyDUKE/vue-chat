@@ -11,6 +11,10 @@ RUN npm ci
 RUN npm run build
 
 FROM node:18-alpine
+
+ARG SECRET
+ARG DATABASE_URL
+
 EXPOSE 8000
 
 COPY --from=build-stage /usr/src/app/server /usr/src/app
@@ -18,7 +22,10 @@ COPY --from=build-stage /usr/src/app/server /usr/src/app
 WORKDIR /usr/src/app
 
 RUN npm ci
-RUN npm run start
+RUN npx prisma generate
+RUN npx prisma migrate dev
+
+CMD ["npm", "run", "start"]
 
 
 

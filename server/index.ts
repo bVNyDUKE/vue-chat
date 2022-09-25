@@ -17,13 +17,13 @@ server.on("upgrade", (request: Request, socket, head) => {
       return;
     }
 
-    wss.handleUpgrade(request, socket, head, function (ws: WebSocket) {
+    wss.handleUpgrade(request, socket, head, function(ws: WebSocket) {
       wss.emit("connection", ws, request.session.user);
     });
   });
 });
 
-const port = process.env.PORT;
+const port = 8000;
 server.listen(port, () => {
   console.log(`App started on port ${port}`);
 });
