@@ -22,8 +22,7 @@ COPY --from=build-stage /usr/src/app/server /usr/src/app
 WORKDIR /usr/src/app
 
 RUN npm ci
-RUN npx prisma generate
-RUN npx prisma migrate dev
+RUN npx prisma migrate reset --force
 
 CMD ["npm", "run", "start"]
 
